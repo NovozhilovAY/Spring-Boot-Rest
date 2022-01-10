@@ -2,6 +2,7 @@ package com.company.controllers;
 
 import com.company.exceptions.ResourceNotFoundException;
 import com.company.models.Customer;
+import com.company.models.task3.LastNameAndDiscounts;
 import com.company.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +41,15 @@ public class CustomerController {
     public Customer updateCustomer(@RequestBody Customer customer) throws ResourceNotFoundException {
         repository.findById(customer.getId()).orElseThrow(()-> new ResourceNotFoundException("Contact not found for id: " + customer.getId()));
         return repository.save(customer);
+    }
+
+    @GetMapping("/customers/districts")
+    public List<String> getUniqDistricts(){
+        return repository.getUniqDistricts();
+    }
+
+    @GetMapping("/customers/by-district")
+    public List<LastNameAndDiscounts> getLastNameAndDiscount(){
+        return repository.findCustomersByDistrict("Нижегородский");
     }
 }
