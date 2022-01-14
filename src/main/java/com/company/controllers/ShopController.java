@@ -50,4 +50,9 @@ public class ShopController {
     public List<String> task3B(){
         return repository.task3B();
     }
+
+    @GetMapping("/shops/task5C")
+    public List<Shop> task5C(){
+        return repository.task5C();
+    }
 }
